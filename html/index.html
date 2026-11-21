@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Habit Tracker - Trang Chủ & Streak</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+
+  <!-- HEADER DÙNG CHUNG -->
+  <header class="app-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+        </svg>
+        <span>HabitTracker</span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li class="nav-item"><a href="index.html" class="active">Trang Chủ</a></li>
+          <li class="nav-item"><a href="pomodoro.html">Đồng Hồ Pomodoro</a></li>
+          <li class="nav-item"><a href="statistics.html">Thống Kê</a></li>
+          <li class="nav-item"><a href="settings.html">Cấu Hình Mục Tiêu</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- NỘI DUNG CHÍNH TRANG CHỦ -->
+  <main class="app-main">
+    <div class="container">
+      
+      <!-- Welcome Hero Banner -->
+      <section class="welcome-hero">
+        <div class="welcome-text">
+          <h1>Chào mừng trở lại! 👋</h1>
+          <p>Mỗi bước tiến nhỏ mỗi ngày sẽ tạo nên thành công lớn. Hãy giữ vững ngọn lửa học tập hôm nay!</p>
+        </div>
+        <div class="welcome-cta">
+          <a href="pomodoro.html" class="btn btn-hero">
+            <span>⏱️ Bắt đầu học ngay</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 2 Cột: Streak Widget & Tiến độ hôm nay -->
+      <section class="grid-2">
+        
+        <!-- Widget Streak -->
+        <div class="card streak-card">
+          <div class="card-header" style="justify-content: center;">
+            <span class="card-title">Chuỗi Học Liên Tiếp</span>
+          </div>
+
+          <div class="streak-flame-wrapper">
+            <span class="streak-flame-icon">🔥</span>
+          </div>
+
+          <div class="streak-count" id="streak-count">0</div>
+          <div class="streak-unit">Ngày liên tiếp</div>
+
+          <div class="streak-banner" id="streak-banner">
+            Đang tải dữ liệu chuỗi học...
+          </div>
+
+          <div class="streak-meta">
+            <div class="streak-meta-item">
+              <div class="meta-val" id="longest-streak">0 ngày</div>
+              <div class="meta-lbl">Kỷ lục dài nhất</div>
+            </div>
+            <div class="streak-meta-item">
+              <div class="meta-val">
+                <span id="today-status-badge" class="badge-pill badge-pill-warning">Chưa học</span>
+              </div>
+              <div class="meta-lbl">Trạng thái hôm nay</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Widget Mục tiêu & Tiến độ hôm nay -->
+        <div class="card progress-card">
+          <div>
+            <div class="card-header">
+              <span class="card-title">🎯 Mục Tiêu Hôm Nay</span>
+              <span class="badge-pill badge-pill-primary" id="progress-percentage">0%</span>
+            </div>
+
+            <div class="progress-header">
+              <div>
+                <span class="hours-display" id="today-hours-text">0.0 giờ</span>
+                <span style="font-size: 0.9rem; color: var(--text-muted);"> đã học</span>
+              </div>
+              <div class="goal-display" id="daily-goal-text">Mục tiêu: 2.0 giờ</div>
+            </div>
+
+            <!-- Thanh tiến độ -->
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill" id="today-progress-fill" style="width: 0%;"></div>
+            </div>
+          </div>
+
+          <!-- Thông tin bổ trợ tiến độ -->
+          <div class="progress-stats-grid">
+            <div class="stat-box">
+              <div class="stat-box-val" id="remaining-time-text">Còn lại: 2 giờ</div>
+              <div class="stat-box-lbl">Thời gian cần học thêm</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-box-val">
+                <a href="settings.html" style="font-size: 0.95rem; text-decoration: underline;">Tùy chỉnh ⚙️</a>
+              </div>
+              <div class="stat-box-lbl">Điều chỉnh mục tiêu</div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Danh sách phiên học hôm nay -->
+      <section class="sessions-list-container">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">📋 Lịch Sử Học Tập Hôm Nay</span>
+            <a href="statistics.html" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.4rem 0.8rem;">
+              Xem tất cả thống kê →
+            </a>
+          </div>
+
+          <div id="today-sessions-list">
+            <!-- Render động bằng js/home.js -->
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- FOOTER DÙNG CHUNG -->
+  <footer class="app-footer">
+    <div class="container">
+      <p><strong>Study Habit Tracker</strong> &copy; 2026. Xây dựng bởi nhóm 5 thành viên.</p>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT LIÊN KẾT ĐÚNG THỨ TỰ -->
+  <script src="js/storage.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/streak.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

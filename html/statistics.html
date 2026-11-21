@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Habit Tracker - Thống Kê & Heatmap</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/statistics.css">
+</head>
+<body>
+
+  <!-- HEADER DÙNG CHUNG -->
+  <header class="app-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+        </svg>
+        <span>HabitTracker</span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li class="nav-item"><a href="index.html">Trang Chủ</a></li>
+          <li class="nav-item"><a href="pomodoro.html">Đồng Hồ Pomodoro</a></li>
+          <li class="nav-item"><a href="statistics.html" class="active">Thống Kê</a></li>
+          <li class="nav-item"><a href="settings.html">Cấu Hình Mục Tiêu</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- NỘI DUNG CHÍNH -->
+  <main class="app-main">
+    <div class="container">
+      
+      <!-- Hàng 4 thẻ số liệu tổng hợp -->
+      <section class="grid-4 metrics-row">
+        <div class="card metric-card">
+          <div class="metric-icon-box metric-icon-blue">⏱️</div>
+          <div>
+            <div class="metric-val" id="stat-total-hours">0h</div>
+            <div class="metric-lbl">Tổng giờ học</div>
+          </div>
+        </div>
+
+        <div class="card metric-card">
+          <div class="metric-icon-box metric-icon-green">📅</div>
+          <div>
+            <div class="metric-val" id="stat-total-days">0 ngày</div>
+            <div class="metric-lbl">Số ngày đã học</div>
+          </div>
+        </div>
+
+        <div class="card metric-card">
+          <div class="metric-icon-box metric-icon-amber">⚡</div>
+          <div>
+            <div class="metric-val" id="stat-avg-daily">0 phút</div>
+            <div class="metric-lbl">Trung bình / ngày</div>
+          </div>
+        </div>
+
+        <div class="card metric-card">
+          <div class="metric-icon-box metric-icon-purple">🎯</div>
+          <div>
+            <div class="metric-val" id="stat-total-sessions">0 phiên</div>
+            <div class="metric-lbl">Phiên hoàn thành</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Biểu đồ cột SVG 7 ngày gần nhất -->
+      <section style="margin-bottom: var(--space-xl);">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">📊 Thời Gian Học Trong Tuần (7 Ngày Gần Nhất)</span>
+            <span class="badge-pill badge-pill-primary">Biểu đồ SVG</span>
+          </div>
+          
+          <div class="chart-container">
+            <svg id="weekly-bar-chart" class="chart-svg"></svg>
+          </div>
+        </div>
+      </section>
+
+      <!-- GitHub-Style Calendar Heatmap -->
+      <section style="margin-bottom: var(--space-xl);">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">🟩 Lịch Sử Học Tập (Calendar Heatmap)</span>
+            <span style="font-size: 0.85rem; color: var(--text-muted);">16 tuần gần nhất</span>
+          </div>
+
+          <div class="heatmap-wrapper">
+            <div id="heatmap-grid" class="heatmap-grid">
+              <!-- Render động bằng js/statistics.js -->
+            </div>
+          </div>
+
+          <div class="heatmap-legend">
+            <span>Ít hơn</span>
+            <div class="legend-square" style="background:#ebedf0;"></div>
+            <div class="legend-square" style="background:#9be9a8;"></div>
+            <div class="legend-square" style="background:#40c463;"></div>
+            <div class="legend-square" style="background:#30a14e;"></div>
+            <div class="legend-square" style="background:#216e39;"></div>
+            <span>Nhiều hơn</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bảng lịch sử các phiên học -->
+      <section>
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">📝 Chi Tiết Tất Cả Phiên Học</span>
+          </div>
+
+          <div class="table-responsive">
+            <table class="stats-table">
+              <thead>
+                <tr>
+                  <th>Mã phiên</th>
+                  <th>Ngày học</th>
+                  <th>Chủ đề</th>
+                  <th>Ghi chú</th>
+                  <th>Thời lượng</th>
+                </tr>
+              </thead>
+              <tbody id="sessions-table-body">
+                <!-- Render động bằng js/statistics.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Tooltip động cho Heatmap -->
+  <div id="heatmap-tooltip"></div>
+
+  <!-- FOOTER DÙNG CHUNG -->
+  <footer class="app-footer">
+    <div class="container">
+      <p><strong>Study Habit Tracker</strong> &copy; 2026. Xây dựng bởi nhóm 5 thành viên.</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPT THEO THỨ TỰ -->
+  <script src="js/storage.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/statistics.js"></script>
+</body>
+</html>

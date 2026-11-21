@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Habit Tracker - Đồng Hồ Pomodoro & Gamification</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/pomodoro.css">
+</head>
+<body>
+
+  <!-- HEADER DÙNG CHUNG -->
+  <header class="app-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+        </svg>
+        <span>HabitTracker</span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li class="nav-item"><a href="index.html">Trang Chủ</a></li>
+          <li class="nav-item"><a href="pomodoro.html" class="active">Đồng Hồ Pomodoro</a></li>
+          <li class="nav-item"><a href="statistics.html">Thống Kê</a></li>
+          <li class="nav-item"><a href="settings.html">Cấu Hình Mục Tiêu</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- NỘI DUNG CHÍNH -->
+  <main class="app-main">
+    <div class="container">
+      
+      <!-- Card chính chứa đồng hồ Pomodoro -->
+      <section class="card" style="text-align: center; max-width: 650px; margin: 0 auto;">
+        
+        <!-- Tab chọn chế độ -->
+        <div class="timer-mode-tabs">
+          <button class="mode-tab-btn active" data-mode="pomodoro">🍅 Pomodoro (25p)</button>
+          <button class="mode-tab-btn" data-mode="shortBreak">☕ Nghỉ ngắn (5p)</button>
+          <button class="mode-tab-btn" data-mode="longBreak">🌴 Nghỉ dài (15p)</button>
+        </div>
+
+        <!-- Vòng tròn đếm ngược tròn SVG -->
+        <div class="timer-circle-container">
+          <svg class="timer-svg" viewBox="0 0 280 280">
+            <circle class="timer-svg-bg" cx="140" cy="140" r="125" />
+            <circle 
+              id="timer-svg-circle" 
+              class="timer-svg-progress" 
+              cx="140" 
+              cy="140" 
+              r="125" 
+            />
+          </svg>
+
+          <!-- Thời gian hiển thị ở giữa -->
+          <div class="timer-text-content">
+            <div class="timer-digits" id="timer-display">25:00</div>
+            <div class="timer-status-label" id="timer-status-text">Pomodoro</div>
+          </div>
+        </div>
+
+        <!-- Nút điều khiển Bắt đầu / Tạm dừng / Đặt lại -->
+        <div class="timer-controls">
+          <button id="btn-timer-reset" class="btn-timer-action btn-timer-reset" title="Đặt lại về ban đầu">
+            🔄
+          </button>
+          <button id="btn-timer-toggle" class="btn-timer-action btn-timer-play" title="Bắt đầu học">
+            ▶️
+          </button>
+        </div>
+
+        <!-- Nhập thông tin chủ đề học -->
+        <div class="pomodoro-task-input">
+          <input 
+            type="text" 
+            id="pomodoro-tag-input" 
+            class="form-control" 
+            placeholder="Chủ đề: Ví dụ: Lập trình, Toán..."
+            value="Lập trình"
+            style="width: 40%;"
+          >
+          <input 
+            type="text" 
+            id="pomodoro-note-input" 
+            class="form-control" 
+            placeholder="Nội dung: Ví dụ: Đọc tài liệu chương 3..." 
+            value="Luyện tập code Vanilla JS"
+            style="flex: 1;"
+          >
+        </div>
+
+      </section>
+
+      <!-- Khu vực Huy hiệu Gamification -->
+      <section class="badges-section">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">🏆 Hệ Thống Huy Hiệu & Gamification</span>
+            <span class="badge-pill badge-pill-primary">Thành tích học tập</span>
+          </div>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">
+            Hoàn thành các mốc học tập và giữ chuỗi liên tiếp để mở khóa các danh hiệu cao quý!
+          </p>
+
+          <div id="badges-container" class="badges-grid">
+            <!-- Render động bằng js/badges.js -->
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Modal Chúc Mừng Mở Khóa Huy Hiệu Mới -->
+  <div id="celebration-modal" class="modal-overlay">
+    <div class="modal-content celebration-box">
+      <button class="modal-close-btn" onclick="window.AppCommon.closeModal('celebration-modal')">&times;</button>
+      
+      <div class="celebration-icon" id="celebration-badge-icon">🏆</div>
+      <div class="celebration-title">Mở Khóa Thành Tích Mới!</div>
+      <h3 id="celebration-badge-title" style="margin-bottom: 8px; color: var(--text-main);">Tên huy hiệu</h3>
+      <p id="celebration-badge-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+        Mô tả thành tích
+      </p>
+
+      <button class="btn btn-primary" onclick="window.AppCommon.closeModal('celebration-modal')" style="width: 100%;">
+        Tuyệt Vời! Tiếp Tục Nào 🚀
+      </button>
+    </div>
+  </div>
+
+  <!-- FOOTER DÙNG CHUNG -->
+  <footer class="app-footer">
+    <div class="container">
+      <p><strong>Study Habit Tracker</strong> &copy; 2026. Xây dựng bởi nhóm 5 thành viên.</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPT THEO THỨ TỰ -->
+  <script src="js/storage.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/badges.js"></script>
+  <script src="js/pomodoro.js"></script>
+</body>
+</html>

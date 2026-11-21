@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Habit Tracker - Cấu Hình Mục Tiêu</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/settings.css">
+</head>
+<body>
+
+  <!-- HEADER DÙNG CHUNG -->
+  <header class="app-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+        </svg>
+        <span>HabitTracker</span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li class="nav-item"><a href="index.html">Trang Chủ</a></li>
+          <li class="nav-item"><a href="pomodoro.html">Đồng Hồ Pomodoro</a></li>
+          <li class="nav-item"><a href="statistics.html">Thống Kê</a></li>
+          <li class="nav-item"><a href="settings.html" class="active">Cấu Hình Mục Tiêu</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- NỘI DUNG CHÍNH -->
+  <main class="app-main">
+    <div class="container">
+      
+      <div class="settings-layout">
+        
+        <!-- Cột trái: Form Cấu hình -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">⚙️ Thiết Lập Mục Tiêu Học Tập</span>
+          </div>
+
+          <form id="settings-form">
+            
+            <!-- Mục tiêu số giờ mỗi ngày -->
+            <div class="form-group">
+              <label for="input-daily-goal" class="form-label">Mục tiêu số giờ học mỗi ngày</label>
+              <div class="input-with-unit">
+                <input 
+                  type="number" 
+                  id="input-daily-goal" 
+                  class="form-control" 
+                  step="0.5" 
+                  min="0.5" 
+                  max="18" 
+                  required
+                >
+                <span class="unit-tag">giờ / ngày</span>
+              </div>
+              <div class="form-hint">Khuyến nghị từ 1.5 đến 4 giờ mỗi ngày để duy trì thói quen bền vững.</div>
+            </div>
+
+            <!-- Giờ nhắc nhở học tập -->
+            <div class="form-group">
+              <label for="input-reminder-time" class="form-label">Khung giờ nhắc nhở học hàng ngày</label>
+              <input 
+                type="time" 
+                id="input-reminder-time" 
+                class="form-control"
+              >
+              <div class="form-hint">Hệ thống sẽ gửi thông báo đẩy và chuông âm thanh khi đến giờ này.</div>
+            </div>
+
+            <!-- Toggle bật/tắt nhắc nhở -->
+            <div class="form-group">
+              <div class="toggle-wrapper">
+                <div>
+                  <div style="font-weight: 600; font-size: 0.95rem;">Bật thông báo nhắc nhở tự động</div>
+                  <div class="form-hint">Nhắc nhở ngay trên màn hình trình duyệt</div>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="toggle-reminder">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Nút quyền thông báo trình duyệt -->
+            <div class="form-group" style="padding-top: var(--space-xs);">
+              <button type="button" id="btn-request-notif" class="btn btn-secondary" style="width: 100%;">
+                <span>🔔 Kiểm tra & Xin quyền thông báo trình duyệt</span>
+              </button>
+            </div>
+
+            <!-- Nút Submit lưu cài đặt -->
+            <div style="margin-top: var(--space-xl); display: flex; gap: var(--space-md);">
+              <button type="submit" class="btn btn-primary" style="flex: 1; padding: 0.85rem;">
+                <span>💾 Lưu Thay Đổi</span>
+              </button>
+            </div>
+
+          </form>
+        </div>
+
+        <!-- Cột phải: Xem trước & Quản lý dữ liệu -->
+        <div>
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">📌 Mục Tiêu Hiện Tại</span>
+            </div>
+
+            <div class="settings-summary-box">
+              <div class="summary-desc">Mỗi ngày phấn đấu học</div>
+              <div class="summary-big-value" id="preview-goal-hours">2.0h</div>
+              <div class="badge-pill badge-pill-primary" id="preview-goal-minutes">120 phút / ngày</div>
+              <div style="margin-top: var(--space-md); font-size: 0.85rem; color: var(--text-muted);" id="preview-reminder-text">
+                Nhắc nhở: Bật lúc 20:00
+              </div>
+            </div>
+          </div>
+
+          <div class="card danger-zone">
+            <div class="card-header">
+              <span class="card-title" style="color: var(--danger);">⚠️ Quản Trị Dữ Liệu</span>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: var(--space-md);">
+              Bạn có thể đặt lại dữ liệu mẫu của nhóm để kiểm thử lại từ đầu các tính năng.
+            </p>
+            <button type="button" id="btn-reset-data" class="btn btn-danger" style="width: 100%;">
+              <span>🔄 Khôi phục dữ liệu ban đầu</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER DÙNG CHUNG -->
+  <footer class="app-footer">
+    <div class="container">
+      <p><strong>Study Habit Tracker</strong> &copy; 2026. Xây dựng bởi nhóm 5 thành viên.</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPT THEO THỨ TỰ -->
+  <script src="js/storage.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/settings.js"></script>
+</body>
+</html>

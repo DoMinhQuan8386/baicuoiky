@@ -1,0 +1,265 @@
+/* ==========================================================================
+   STUDY HABIT TRACKER - POMODORO & GAMIFICATION STYLES (MEMBER 5)
+   File: css/pomodoro.css
+   Mục đích: Thiết kế đồng hồ đếm ngược SVG tròn, nút điều khiển,
+   danh sách huy hiệu Gamification và hiệu ứng chúc mừng mở khóa huy hiệu.
+   ========================================================================== */
+
+/* Pomodoro Modes Tab */
+.timer-mode-tabs {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+}
+
+.mode-tab-btn {
+  padding: 0.6rem 1.4rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border);
+  background: #ffffff;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.mode-tab-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.mode-tab-btn.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+/* Circular SVG Timer Display */
+.timer-circle-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 280px;
+  height: 280px;
+  margin: 0 auto var(--space-xl) auto;
+}
+
+.timer-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.timer-svg-bg {
+  fill: none;
+  stroke: #e2e8f0;
+  stroke-width: 10;
+}
+
+.timer-svg-progress {
+  fill: none;
+  stroke: var(--primary);
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 785;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1s linear, stroke 0.3s ease;
+}
+
+.timer-text-content {
+  position: absolute;
+  text-align: center;
+}
+
+.timer-digits {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.timer-status-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-top: 8px;
+  letter-spacing: 1.5px;
+}
+
+/* Timer Control Buttons */
+.timer-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.btn-timer-action {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+}
+
+.btn-timer-action:hover {
+  transform: scale(1.08);
+}
+
+.btn-timer-action:active {
+  transform: scale(0.95);
+}
+
+.btn-timer-play {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.btn-timer-play:hover {
+  background: var(--primary-hover);
+}
+
+.btn-timer-pause {
+  background: var(--warning);
+  color: #ffffff;
+}
+
+.btn-timer-reset {
+  background: #f1f5f9;
+  color: var(--text-muted);
+  width: 48px;
+  height: 48px;
+  font-size: 1.1rem;
+}
+
+.btn-timer-reset:hover {
+  background: #e2e8f0;
+  color: var(--text-main);
+}
+
+/* Session metadata input */
+.pomodoro-task-input {
+  max-width: 420px;
+  margin: 0 auto var(--space-xl) auto;
+  display: flex;
+  gap: var(--space-sm);
+}
+
+/* Gamification & Badges Section */
+.badges-section {
+  margin-top: var(--space-2xl);
+}
+
+.badges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.badge-card {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg) var(--space-md);
+  text-align: center;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.badge-card.unlocked {
+  border-color: #fde68a;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.15);
+}
+
+.badge-card.unlocked:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(245, 158, 11, 0.25);
+}
+
+.badge-card.locked {
+  opacity: 0.55;
+  filter: grayscale(1);
+  background: #f8fafc;
+}
+
+.badge-icon-box {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto var(--space-sm) auto;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  background: #fef3c7;
+}
+
+.badge-card.unlocked .badge-icon-box {
+  animation: badgeShine 3s infinite ease-in-out;
+}
+
+@keyframes badgeShine {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08) rotate(3deg); }
+}
+
+.badge-card-title {
+  font-weight: 700;
+  font-size: var(--font-size-base);
+  margin-bottom: 4px;
+  color: var(--text-main);
+}
+
+.badge-card-desc {
+  font-size: 0.785rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.badge-status-tag {
+  margin-top: var(--space-sm);
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Badge Celebration Modal */
+.celebration-box {
+  text-align: center;
+}
+
+.celebration-icon {
+  font-size: 4.5rem;
+  margin-bottom: var(--space-sm);
+  display: inline-block;
+  animation: celebrationPop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes celebrationPop {
+  0% { transform: scale(0) rotate(-30deg); opacity: 0; }
+  70% { transform: scale(1.25) rotate(10deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.celebration-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: var(--space-xs);
+}
